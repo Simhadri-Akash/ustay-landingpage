@@ -5,8 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import StayStory from './StayStory';
 gsap.registerPlugin(ScrollTrigger);
 export const MAP='https://www.google.co.in/maps/place/Ustay/@17.4488962,78.390307,15z/data=!4m21!1m11!3m10!1s0x3bcb91ee106c941b:0x8eee20b9076f7783!2sUstay!5m2!4m1!1i2!8m2!3d17.4488962!4d78.390307!10e1!16s%2Fg%2F11ms95wpxl!3m8!1s0x3bcb91ee106c941b:0x8eee20b9076f7783!5m2!4m1!1i2!8m2!3d17.4488962!4d78.390307!16s%2Fg%2F11ms95wpxl';
-export const whatsapp=(message='Hello UStay, I would like to enquire about availability.')=>`https://wa.me/919247539880?text=${encodeURIComponent(message)}`;
-export function Enquire({children='Enquire about your stay',message,className='button'}:{children?:ReactNode;message?:string;className?:string}) {return <a className={className} href={whatsapp(message)} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={18}/></a>}
+export const whatsapp=(message='Hello UStay, I would like to enquire about availability.',phone='919247539880')=>`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+export function Enquire({children='Enquire about your stay',message,className='button',phone}:{children?:ReactNode;message?:string;className?:string;phone?:string}) {return <a className={className} href={whatsapp(message,phone)} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={18}/></a>}
 export function Eyebrow({number,children}:{number:string;children:ReactNode}) {return <p className="eyebrow"><span>{number}</span>{children}</p>}
 export default function App(){
  const root=useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export default function App(){
   {menu&&<nav id="mobile-menu" className="mobile-menu" aria-label="Mobile navigation">{[['Explore','rooms'],['Monthly living','monthly'],['Find us','location'],['Get in touch','contact']].map(([label,id])=><a key={id} href={`#${id}`} onClick={()=>setMenu(false)}>{label}<ArrowUpRight/></a>)}</nav>}
   <main>
    <section id="home" className="hero" aria-label="Welcome to Ustay">
-    <div className="hero-media"><video className="hero-video" autoPlay muted loop playsInline poster="/assets/exterior.jpeg" aria-hidden="true"><source src="/assets/exterior.mp4" type="video/mp4"/></video><div className="hero-shade"/></div>
+    <div className="hero-media"><img className="hero-image" src="/assets/exterior.jpeg" alt="" aria-hidden="true"/><div className="hero-shade"/></div>
     <div className="hero-copy"><p className="eyebrow light"><span className="tiny-line"/>MADHAPUR, HYDERABAD</p><h1>Stay easy.<br/><em>Feel at home.</em></h1><p className="hero-intro">Comfortable rooms.<br/>Thoughtful spaces.<br/>Everything you need, right here.</p><a className="button gold" href="#rooms">Step inside <ArrowDown size={18}/></a></div>
     <a className="scroll-hint" href="#rooms"><span><ArrowDown size={19}/></span>SCROLL TO DISCOVER</a>
    </section>
