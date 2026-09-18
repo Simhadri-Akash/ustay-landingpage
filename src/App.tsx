@@ -6,7 +6,8 @@ import StayStory from './StayStory';
 gsap.registerPlugin(ScrollTrigger);
 export const MAP='https://www.google.co.in/maps/place/Ustay/@17.4488962,78.390307,15z/data=!4m21!1m11!3m10!1s0x3bcb91ee106c941b:0x8eee20b9076f7783!2sUstay!5m2!4m1!1i2!8m2!3d17.4488962!4d78.390307!10e1!16s%2Fg%2F11ms95wpxl!3m8!1s0x3bcb91ee106c941b:0x8eee20b9076f7783!5m2!4m1!1i2!8m2!3d17.4488962!4d78.390307!16s%2Fg%2F11ms95wpxl';
 export const whatsapp=(message='Hello UStay, I would like to enquire about availability.',phone='919247539880')=>`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-export function Enquire({children='Enquire about your stay',message,className='button',phone}:{children?:ReactNode;message?:string;className?:string;phone?:string}) {return <a className={className} href={whatsapp(message,phone)} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={18}/></a>}
+export const whatsappDirect=(message:string,phone:string)=>`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+export function Enquire({children='Enquire about your stay',message,className='button',phone,direct=false}:{children?:ReactNode;message?:string;className?:string;phone?:string;direct?:boolean}) {const resolvedMessage=message??'Hello UStay, I would like to enquire about availability.';const resolvedPhone=phone??'919247539880';return <a className={className} href={direct?whatsappDirect(resolvedMessage,resolvedPhone):whatsapp(resolvedMessage,resolvedPhone)} target="_blank" rel="noopener noreferrer">{children}<ArrowUpRight size={18}/></a>}
 export function Eyebrow({number,children}:{number:string;children:ReactNode}) {return <p className="eyebrow"><span>{number}</span>{children}</p>}
 export default function App(){
  const root=useRef<HTMLDivElement>(null);
